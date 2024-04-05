@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+    include ../mixins/articleForm
+    div.content
+        +articleForm(article, 'Publish', '/article/add', '/', null)

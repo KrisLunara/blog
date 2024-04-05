@@ -1,0 +1,9 @@
+mixin replyForm(comment)
+    div.reply-form
+        form(action=`/comment/${comment.id}/reply/create` method='post')
+            div.input-form-row
+                div.input-container
+                    input(type='text' name='author_name' id='author_name' required=true placeholder='Your name')
+                div.input-container.wide
+                    input(placeholder='Your comment here...' required=true name='body' id='body')
+                button.button.primary(type='submit') Reply

@@ -1,0 +1,22 @@
+mixin comment(comment)
+    include replyForm
+    div.comment
+        div.comment-header
+            div.comment-author=comment.author_name
+            div.comment-time=comment.commentedAgo
+        div.comment-body=comment.body
+        div
+            h4.reply-header Replies (#{comment.replies.length})
+            div.reply-container
+                +replyForm(comment)
+                if comment.replies.length > 0
+                    ul.reply-list
+                        each reply in comment.replies
+                            li
+                                div.comment
+                                    div.comment-header
+                                        div.comment-author=reply.author_name
+                                        div.comment-time=reply.friendlyReplyDate
+                                    div.comment-body=reply.body
+                else
+                    p.empty-list No replies
