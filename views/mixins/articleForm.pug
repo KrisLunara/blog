@@ -13,6 +13,7 @@ mixin articleForm(article, buttonText, saveUrl, cancelUrl, deleteUrl)
             label(for='body').form-label
             textarea(name='body' id='body' rows=20 cols=100 placeholder="Write your blog here...") #{article.body}
         a.button(href=cancelUrl) Cancel
-        if(deleteUrl)
-            a.button(href=deleteUrl) Delete
+        if(deleteUrl && user && article.isOwnedBy(user))
+            if(deleteUrl)
+                a.button(href=deleteUrl) Delete
         button.button.primary(type='submit') #{buttonText}

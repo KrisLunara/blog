@@ -1,4 +1,4 @@
-const {Comment, Reply} = require('../models');
+const {Comment, Reply, Article} = require('../models');
 
 module.exports.createComment = async function(req,res){
     let articleId = req.params.articleId;
@@ -22,4 +22,28 @@ module.exports.addReply = async function(req,res){
         parent_comment_id: parentComment.id
     });
     res.redirect(`/article/${articleId}`);
+}
+
+module.exports.deleteComment = async function(req,res){
+    const comment = await Comment.findByPk(req.params.commentId);
+    await Comment.destroy({
+        is_deleted: true
+    }, {
+        where: {
+            id: req.params.commentId
+        }
+    });
+    res.redirect(`/article/${comment.article_id}`);
+}
+
+module.exports.deleteReply = async function(req,res){
+    const reply = await Reply.findByPk(req.params.replyId);
+    await Reply.destroy({
+        is_deleted: true
+    }, {
+        where: {
+            id: req.params.replyId
+        }
+    });
+    res.redirect(`/article/${reply.article_id}`);
 }

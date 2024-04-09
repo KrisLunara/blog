@@ -5,7 +5,8 @@ block content
     div.articles-header
         div.article-header-title Here's What's New
         div
-            a.button.primary(href='article/add') Write a New Article
+            if user && user.is('author')
+                a.button.primary(href='article/add') Write a New Article
 
     ul.article-list
         each article in articles

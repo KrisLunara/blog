@@ -4,7 +4,12 @@ mixin comment(comment)
         div.comment-header
             div.comment-author=comment.author_name
             div.comment-time=comment.commentedAgo
-        div.comment-body=comment.body
+        if comment.is_deleted
+            p [Deleted]
+        else
+            div.comment-body=comment.body
+            if user && user.is('admin')
+                a(href=`/comment/${comment.id}/delete`) Delete
         div
             h4.reply-header Replies (#{comment.replies.length})
             div.reply-container
@@ -17,6 +22,11 @@ mixin comment(comment)
                                     div.comment-header
                                         div.comment-author=reply.author_name
                                         div.comment-time=reply.friendlyReplyDate
-                                    div.comment-body=reply.body
+                                    if comment.is_deleted
+                                        p [Deleted]
+                                    else
+                                        div.comment-body=reply.body
+                                        if user && user.is('admin')
+                                            a(href=`/comment/${comment.id}/reply/delete`) Delete
                 else
                     p.empty-list No replies

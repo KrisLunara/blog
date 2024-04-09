@@ -4,5 +4,21 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    nav
+      div.container
+        h3 Bloggerdom
+        ul.nav.justify-content-end.main-nav
+          li.nav-item
+            a.nav-link(href='/') View Articles
+          if user
+            li.nav-item
+              a.nav-link(href='#') Hello #{user.first_name}
+            li.nav-item
+              a.nav-link(href='/logout') Logout
+          else
+            li.nav-item
+              a.nav-link(href='/login') Login
+            li.nav-item
+              a.nav-link(href='/register') Register
     div.container
       block content

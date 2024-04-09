@@ -6,7 +6,10 @@ block content
         div.content
             div.article-header-row
                 h1.article-title=article.title
-                a.button(href=`/article/${article.id}`) Edit
+                if user && article.isOwnedBy(user)
+                    a.button(href=`/article/${article.id}`) Edit
+                if user && user.is('admin')
+                    a.button(href=`/article/${article.id}/delete`) Delete
             p.published-on Published
                 strong.emphasize #{article.friendlyPublishedDate}
                 | by
